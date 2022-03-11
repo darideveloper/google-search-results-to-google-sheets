@@ -7,8 +7,9 @@ from scraping_manager.automate import Web_scraping
 from config import Config
 from spreadsheet_manager.google_ss import SS_manager
 
-keywords = "hola mundo programación"
 def main (): 
+
+    keywords = input ("search keywords: ")
 
     # Generate URL
     keywords_text = urllib.parse.quote(keywords.replace(" ", "+"))
@@ -25,6 +26,7 @@ def main ():
     ss_manager = SS_manager(gs_link, gs_credentials)
 
     # Start browser
+    logger.info ("Searching...")
     scraper = Web_scraping (headless=headless, web_page=url)
 
     # Get first results
@@ -61,6 +63,8 @@ def main ():
     result_position = 0
     data = []
     for link in result_links:
+
+        logger.info (f"Extracting data from page: {link}...")
 
         # Open next page
         result_position += 1
@@ -115,6 +119,7 @@ def main ():
 
     # KEYWORDS SHEET
     # Set sheet and clean
+    logger.info ("Saving data in sheet: Keywords...")
     ss_manager.change_sheet ("Keywords")
     ss_manager.worksheet.clear ()
 
@@ -131,6 +136,7 @@ def main ():
 
     # META SHEET
     # Set sheet and clean
+    logger.info ("Saving data in sheet: Results meta...")
     ss_manager.change_sheet ("Results meta")
     ss_manager.worksheet.clear ()
 
@@ -156,6 +162,7 @@ def main ():
 
     # STRUCTURE SHEET
     # Set sheet and clean
+    logger.info ("Saving data in sheet: Results structure...")
     ss_manager.change_sheet ("Results structure")
     ss_manager.worksheet.clear ()
     data_formated = []
@@ -208,6 +215,8 @@ def main ():
 
     # Save data structure
     ss_manager.worksheet.update ("B5", data_structure)
+
+    logger.info ("Done.")
 
 
 if __name__ == "__main__":
