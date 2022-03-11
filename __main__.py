@@ -21,17 +21,8 @@ def main ():
     gs_link = credentials.get ("gs_link")
     gs_credentials = os.path.join (os.path.dirname(__file__), "spreadsheet_manager", "credentials.json")
 
-    ss_manager = ss_keywords = SS_manager(gs_link, gs_credentials, "Keywords")
-
-    # # Connect google sheets
-    # ss_keywords = SS_manager(gs_link, gs_credentials, "Keywords")
-    # ss_results_meta = SS_manager(gs_link,gs_credentials, "Results meta")
-    # ss_results_structure = SS_manager(gs_link, gs_credentials, "Results structure")
-
-    # # Clean google sheets
-    # ss_keywords.worksheet.clear ()
-    # ss_results_meta.worksheet.clear ()
-    # ss_results_structure.worksheet.clear ()
+    # Set spreadsheet 
+    ss_manager = SS_manager(gs_link, gs_credentials)
 
     # Start browser
     scraper = Web_scraping (headless=headless, web_page=url)
@@ -61,10 +52,10 @@ def main ():
                 more_pages = False
                 break      
 
-    # Go to next results page
-    if more_pages:
-        selector_next = "#pnnext"
-        scraper.click (selector_next)
+        # Go to next results page
+        if more_pages:
+            selector_next = "#pnnext"
+            scraper.click (selector_next)
 
     # Extract data from links pages
     result_position = 0
