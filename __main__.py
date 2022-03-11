@@ -73,5 +73,18 @@ def main ():
             description = ""
         description_lenght = len(description)
 
+        # Get page structure
+        selector_structure = "h1, h2, h3, h4, h5, h3"
+        headers_elem = scraper.get_elems (selector_structure)
+        headers_formated = []
+        for header in headers_elem:
+
+            header_text = header.text
+            header_tag = header.tag_name
+            header_formated = f"<{header_tag}>{header_text}<{header_tag}/>"
+            headers_formated.append (header_formated)
+        
+        print (headers_formated)
+
 if __name__ == "__main__":
     main()
