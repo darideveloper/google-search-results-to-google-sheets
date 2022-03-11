@@ -46,11 +46,13 @@ def main ():
                 break      
 
     # Go to next results page
-    selector_next = "#pnnext"
-    scraper.click (selector_next)
+    if more_pages:
+        selector_next = "#pnnext"
+        scraper.click (selector_next)
 
     # Extract data from links pages
     result_position = 0
+    # data = []
     for link in result_links:
 
         # Open next page
@@ -84,7 +86,7 @@ def main ():
             header_formated = f"<{header_tag}>{header_text}<{header_tag}/>"
             headers_formated.append (header_formated)
         
-        print (headers_formated)
+        # Save data
 
 if __name__ == "__main__":
     main()
