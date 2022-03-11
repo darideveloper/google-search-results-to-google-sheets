@@ -23,13 +23,16 @@ def main ():
     # Get first results
     selector_results_elems = "#search > div .yuRUbf > a"
     results_elems = scraper.get_elems (selector_results_elems)
+    result_links = []
     for result_elem in results_elems:
         link = result_elem.get_attribute("href")
         title = result_elem.find_element_by_css_selector ("h3").text
         if not title:
             continue
 
-        print (title, link)
+        result_links.append (link)
+        if len (result_links) == max_results:
+            break       
 
 
     print ()
