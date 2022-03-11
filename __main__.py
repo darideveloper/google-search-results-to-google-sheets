@@ -1,9 +1,11 @@
+import os
 import time
 import urllib.parse
 from config import Config
 from logs import logger
 from scraping_manager.automate import Web_scraping
 from config import Config
+from spreadsheet_manager.google_ss import SS_manager
 
 keywords = "hola mundo programación"
 def main (): 
@@ -16,6 +18,17 @@ def main ():
     credentials = Config()
     headless = not credentials.get ("show_browser")
     max_results = credentials.get ("max_results")
+    gs_link = credentials.get ("gs_link")
+    gs_credentials = os.path.join (os.path.dirname(__file__), "spreadsheet_manager", "credentials.json")
+
+    print (gs_credentials)
+    ss_keyword = SS_manager(gs_link, gs_credentials, "Keyword")
+    ss_results = SS_manager(gs_link, gs_credentials, "Results")
+    ss_results_structure = SS_manager(gs_link, gs_credentials, "Results structure")
+
+    ss_keyword.worksheet.clear ()
+
+    return None
 
     # Start browser
     scraper = Web_scraping (headless=headless, web_page=url)
@@ -98,6 +111,7 @@ def main ():
         }
         data.append (data_row)
     
+    # Format data for google sheets
     print ("")
 
 if __name__ == "__main__":
