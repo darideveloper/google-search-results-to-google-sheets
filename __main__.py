@@ -35,6 +35,10 @@ def main ():
             if not title:
                 continue
 
+            # Skip pdf files
+            if ".pdf" in link:
+                continue
+
             # Save valid links
             result_links.append (link)
             if len (result_links) == max_results:
@@ -68,9 +72,6 @@ def main ():
         else:
             description = ""
         description_lenght = len(description)
-
-        print (description_lenght, description)
-
 
 if __name__ == "__main__":
     main()
