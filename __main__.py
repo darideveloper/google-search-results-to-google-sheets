@@ -66,6 +66,8 @@ def main ():
         result_position += 1
         scraper.set_page (link)
         time.sleep (1)
+        # scraper.go_bottom ()
+        scraper.refresh_selenium()
 
         # Get meta data (title)
         selector_title = "head > title"
@@ -83,14 +85,19 @@ def main ():
         description_lenght = len(description)
 
         # Get page structure
-        selector_structure = "h1, h2, h3, h4, h5, h3"
+        selector_structure = "h1, h2, h3, h4, h5, h6"
         headers_elem = scraper.get_elems (selector_structure)
         headers_formated = []
         for header in headers_elem:
 
             header_text = header.text
             header_tag = header.tag_name
-            header_formated = f"<{header_tag}>{header_text}<{header_tag}/>"
+
+            # Skip empty or hide tags
+            if not header_text:
+                continue
+
+            header_formated = f"<{header_tag}> {header_text}"
             headers_formated.append (header_formated)
         
         # Save data
@@ -184,7 +191,7 @@ def main ():
 
         # Save row data
         for page in data:
-            if len(page["structure"]) > structure_column + 1:
+            if len(page["structure"]) >= structure_column + 1:
                 data_structure[structure_column].append (page["structure"][structure_column])
             else:
                 data_structure[structure_column].append ("")
