@@ -52,8 +52,24 @@ def main ():
         # Open next page
         result_position += 1
         scraper.set_page (link)
-        time.sleep (3)
+        time.sleep (1)
 
+        # Get meta data (title)
+        selector_title = "head > title"
+        title = scraper.get_elem (selector_title).get_attribute('innerHTML')
+        title_lenght = len(title)
+
+        # Get meta data (description)
+        selector_description = 'head > meta[name="description"]'
+        try:
+            description = scraper.get_elem (selector_description).get_attribute('innerHTML')
+        except: 
+            pass
+        else:
+            description = ""
+        description_lenght = len(description)
+
+        print (description_lenght, description)
 
 
 if __name__ == "__main__":
