@@ -1,4 +1,4 @@
-import os
+import time
 import urllib.parse
 from config import Config
 from logs import logger
@@ -45,9 +45,15 @@ def main ():
     selector_next = "#pnnext"
     scraper.click (selector_next)
 
-    
+    # Extract data from links pages
+    result_position = 0
+    for link in result_links:
 
-    print ()
+        # Open next page
+        result_position += 1
+        scraper.set_page (link)
+        time.sleep (3)
+
 
 
 if __name__ == "__main__":
