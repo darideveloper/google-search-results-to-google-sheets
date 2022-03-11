@@ -114,6 +114,7 @@ def main ():
         }
         data.append (data_row)
     
+
     # KEYWORDS SHEET
     # Set sheet and clean
     ss_manager.change_sheet ("Keywords")
@@ -127,7 +128,8 @@ def main ():
     data_formated.append ([keywords])
 
     # Save
-    ss_keywords.write_data (data_formated)
+    ss_manager.worksheet.update ("A1", data_formated)
+
 
     # META SHEET
     # Set sheet and clean
@@ -151,7 +153,8 @@ def main ():
         data_formated.append (row_formated)
     
     # Save
-    ss_manager.write_data (data_formated)
+    ss_manager.worksheet.update ("A1", data_formated)
+
 
     # STRUCTURE SHEET
     # Set sheet and clean
@@ -202,10 +205,10 @@ def main ():
     data_formated.append (data_structure_header)
 
     # Save general data
-    ss_manager.write_data (data_formated)
+    ss_manager.worksheet.update ("A1", data_formated)
 
     # Save data structure
-    ss_manager.write_data (data_structure, row=5, column=2)
+    ss_manager.worksheet.update ("B5", data_structure)
 
 
 if __name__ == "__main__":
