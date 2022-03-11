@@ -44,6 +44,9 @@ def main ():
             if not title:
                 continue
 
+            if "www.youtube.com" in link:
+                continue
+
             # Skip pdf files
             if ".pdf" in link:
                 continue
