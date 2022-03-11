@@ -186,7 +186,8 @@ def main ():
         for page in data:
             if len(page["structure"]) > structure_column + 1:
                 data_structure[structure_column].append (page["structure"][structure_column])
-
+            else:
+                data_structure[structure_column].append ("")
 
     # Save sublists in main list
     data_formated.append (data_name)
