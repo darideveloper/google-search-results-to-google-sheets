@@ -21,15 +21,17 @@ def main ():
     gs_link = credentials.get ("gs_link")
     gs_credentials = os.path.join (os.path.dirname(__file__), "spreadsheet_manager", "credentials.json")
 
-    # Connect google sheets
-    ss_keyword = SS_manager(gs_link, gs_credentials, "Keyword")
-    ss_results = SS_manager(gs_link, gs_credentials, "Results")
-    ss_results_structure = SS_manager(gs_link, gs_credentials, "Results structure")
+    ss_manager = ss_keywords = SS_manager(gs_link, gs_credentials, "Keywords")
 
-    # Clean google sheets
-    ss_keyword.worksheet.clear ()
-    ss_results.worksheet.clear ()
-    ss_results_structure.worksheet.clear ()
+    # # Connect google sheets
+    # ss_keywords = SS_manager(gs_link, gs_credentials, "Keywords")
+    # ss_results_meta = SS_manager(gs_link,gs_credentials, "Results meta")
+    # ss_results_structure = SS_manager(gs_link, gs_credentials, "Results structure")
+
+    # # Clean google sheets
+    # ss_keywords.worksheet.clear ()
+    # ss_results_meta.worksheet.clear ()
+    # ss_results_structure.worksheet.clear ()
 
     # Start browser
     scraper = Web_scraping (headless=headless, web_page=url)
@@ -112,13 +114,45 @@ def main ():
         }
         data.append (data_row)
     
-    # Save in data in Keyword sheet
+    # KEYWORDS SHEET
+    # Set sheet and clean
+    ss_manager.change_sheet ("Keywords")
+    ss_manager.worksheet.clear ()
+
+    # Create header
     data_formated = []
     data_formated.append (["Google Main Keyword"])
-    data_formated.append ([keywords])
-    ss_keyword.write_data (data_formated, row=1, column=1)
 
+    # Format data
+    data_formated.append ([keywords])
+
+    # Save
+    ss_keywords.write_data (data_formated)
+
+    # META SHEET
+    # Set sheet and clean
+    ss_manager.change_sheet ("Results meta")
+    ss_manager.worksheet.clear ()
+
+    # Create header
+    data_formated = []
+    data_formated.append (["Position", "Meta Title", "Length", "Meta Description", "Length", "URL"])
+
+    # Format data
+    for page in data:
+        row_formated = [
+            page["position"],
+            page["title"],
+            page["title_lenght"],
+            page["description"],
+            page["description_lenght"],
+            page["url"],
+        ]
+        data_formated.append (row_formated)
     
+    # Save
+    ss_manager.write_data (data_formated)
+
 
 if __name__ == "__main__":
     main()

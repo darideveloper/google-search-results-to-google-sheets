@@ -21,13 +21,13 @@ class SS_manager ():
         client = gspread.authorize(creds)
 
         # Conect to google sheet
-        sheet = client.open_by_url(google_sheet_link)
+        self.sheet = client.open_by_url(google_sheet_link)
 
         # Set the sheet 1 as worksheet
         if sheet_name:
-            self.worksheet = sheet.worksheet(sheet_name)
+            self.worksheet = self.sheet.worksheet(sheet_name)
         else:
-            self.worksheet = sheet.sheet1
+            self.worksheet = self.sheet.sheet1
 
     def write_cell (self, value, row=1, column=1):
         """ Write data in specific cell 
@@ -41,7 +41,7 @@ class SS_manager ():
         if not data: 
             print ("THERE IS NO NEW INFORMATION TO WRITE IN THE FILE.")
         else:
-            print ("Writing information on spreadsheet...")
+            # print ("Writing information on spreadsheet...")
 
             # Loop for each row of data
             for row_data in data: 
@@ -61,4 +61,9 @@ class SS_manager ():
 
         records = self.worksheet.get_all_records()
         return records
+
+    def change_sheet (self, sheet_name:str):
+        """Change the current worksheet"""
+
+        self.worksheet = self.sheet.worksheet(sheet_name)
 
