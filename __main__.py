@@ -52,7 +52,7 @@ def main ():
 
     # Extract data from links pages
     result_position = 0
-    # data = []
+    data = []
     for link in result_links:
 
         # Open next page
@@ -87,6 +87,18 @@ def main ():
             headers_formated.append (header_formated)
         
         # Save data
+        data_row = {
+            "url": link,
+            "position": result_position,
+            "title": title, 
+            "title_lenght": title_lenght,
+            "description": description, 
+            "description_lenght": description_lenght,
+            "structure": headers_formated
+        }
+        data.append (data_row)
+    
+    print ("")
 
 if __name__ == "__main__":
     main()
