@@ -21,14 +21,15 @@ def main ():
     gs_link = credentials.get ("gs_link")
     gs_credentials = os.path.join (os.path.dirname(__file__), "spreadsheet_manager", "credentials.json")
 
-    print (gs_credentials)
+    # Connect google sheets
     ss_keyword = SS_manager(gs_link, gs_credentials, "Keyword")
     ss_results = SS_manager(gs_link, gs_credentials, "Results")
     ss_results_structure = SS_manager(gs_link, gs_credentials, "Results structure")
 
+    # Clean google sheets
     ss_keyword.worksheet.clear ()
-
-    return None
+    ss_results.worksheet.clear ()
+    ss_results_structure.worksheet.clear ()
 
     # Start browser
     scraper = Web_scraping (headless=headless, web_page=url)
@@ -111,8 +112,13 @@ def main ():
         }
         data.append (data_row)
     
-    # Format data for google sheets
-    print ("")
+    # Save in data in Keyword sheet
+    data_formated = []
+    data_formated.append (["Google Main Keyword"])
+    data_formated.append ([keywords])
+    ss_keyword.write_data (data_formated, row=1, column=1)
+
+    
 
 if __name__ == "__main__":
     main()
