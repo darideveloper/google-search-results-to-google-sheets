@@ -153,6 +153,60 @@ def main ():
     # Save
     ss_manager.write_data (data_formated)
 
+    # STRUCTURE SHEET
+    # Set sheet and clean
+    ss_manager.change_sheet ("Results structure")
+    ss_manager.worksheet.clear ()
+    data_formated = []
+    data_name = ["Name"]
+    data_url = ["URL"]
+    data_title = ["Meta Title"]
+    data_description = ["Meta Description"]
+    data_structure_header = ["Page Structure"]
+    data_structure = []
+    structure_max_rows = 0
+
+    # Format general data
+    for page in data:
+
+        # Get page domain
+        domain = urllib.parse.urlparse(page["url"]).netloc
+
+        # Order data in correct list
+        data_name.append (domain)
+        data_url.append (page["url"])
+        data_title.append (page["title"])
+        data_description.append (page["description"])
+
+        structure_rows = len (page["structure"])
+        if structure_rows > structure_max_rows:
+             structure_max_rows = structure_rows
+    
+    # Format structure data
+    for structure_column in range (structure_max_rows):
+
+        # add new column
+        data_structure.append ([])
+
+        # Save row data
+        for page in data:
+            if len(page["structure"]) > structure_column + 1:
+                data_structure[structure_column].append (page["structure"][structure_column])
+
+
+    # Save sublists in main list
+    data_formated.append (data_name)
+    data_formated.append (data_url)
+    data_formated.append (data_title)
+    data_formated.append (data_description)
+    data_formated.append (data_structure_header)
+
+    # Save general data
+    ss_manager.write_data (data_formated)
+
+    # Save data structure
+    ss_manager.write_data (data_structure, row=5, column=2)
+
 
 if __name__ == "__main__":
     main()
