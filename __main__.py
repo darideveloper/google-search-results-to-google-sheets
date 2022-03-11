@@ -22,18 +22,30 @@ def main ():
 
     # Get first results
     selector_results_elems = "#search > div .yuRUbf > a"
-    results_elems = scraper.get_elems (selector_results_elems)
     result_links = []
-    for result_elem in results_elems:
-        link = result_elem.get_attribute("href")
-        title = result_elem.find_element_by_css_selector ("h3").text
-        if not title:
-            continue
+    more_pages = True
+    while more_pages:
 
-        result_links.append (link)
-        if len (result_links) == max_results:
-            break       
+        results_elems = scraper.get_elems (selector_results_elems)
+        for result_elem in results_elems:
 
+            # Get valid links
+            link = result_elem.get_attribute("href")
+            title = result_elem.find_element_by_css_selector ("h3").text
+            if not title:
+                continue
+
+            # Save valid links
+            result_links.append (link)
+            if len (result_links) == max_results:
+                more_pages = False
+                break      
+
+    # Go to next results page
+    selector_next = "#pnnext"
+    scraper.click (selector_next)
+
+    
 
     print ()
 
