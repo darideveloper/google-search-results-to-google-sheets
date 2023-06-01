@@ -41,82 +41,82 @@ Project type: **client's project**
 
 # Details
 
-Save all data in a google sheet.\r
-\r
-This project works automating a google chrome window.\r
-\r
+Save all data in a google sheet.
+
+This project works automating a google chrome window.
+
 *Note: the project automatically excludes PDF files, videos and Google questions.*
 
 # Install
 
-## Third party modules\r
-\r
-Open Terminal in project folder and install all modules from pip:\r
-(here a tutorial about [how to open terminal in project folder for windows](https://github.com/DariHernandez/tutorials/tree/master/open%20terminal%20(cmd)%20in%20project%20folder%20in%20windows)) \r
-\r
-\\`\\`\\` bash\r
-$ pip install -r requirements.txt\r
-\\`\\`\\`\r
-\r
-## Programs\r
-\r
-To run the project, the following programs must be installed:\r
-\r
+## Third party modules
+
+Open Terminal in project folder and install all modules from pip:
+(here a tutorial about [how to open terminal in project folder for windows](https://github.com/DariHernandez/tutorials/tree/master/open%20terminal%20(cmd)%20in%20project%20folder%20in%20windows)) 
+
+``` bash
+$ pip install -r requirements.txt
+```
+
+## Programs
+
+To run the project, the following programs must be installed:
+
 * [Google Chrome](https://www.google.com/intl/es/chrome) last version
 
 # Settings
 
-There are some few steps before run the project:\r
-\r
-## Generate a google sheets api key\r
-\r
-For use this project, you need to generate a *google sheets api key*, from google console, sand save it in the folder \\\"spreadsheet_manager\\\", width the name \\\"credentials.json\\\". \r
-Here a tutorial about [how to generate a google sheets api key, step by step](https://github.com/DariHernandez/tutorials/tree/master/generate%20google%20sheets%20api%20key)\r
-\r
-**WARNING:** Without the api key, the program will raise and error.\r
-\r
-## Google sheets template\r
-\r
-For use the program, you need a google spreadsheet with the next sheets: \r
-* Keywords\r
-* Results meta\r
-* Results structure\r
-\r
-You can copy this sample sheet: https://docs.google.com/spreadsheets/d/1mR_WqM2cHQw5OsIyH7jev8s2DCrcz32Zg79_UzS0l1A/edit?usp=sharing \r
-\r
-Create or copy the spreadsheet, and generate a share link with edit permissions (you will need it in the next step)\r
-\r
-*Note: Each time that you run the program, the data for each sheet is cleaned. If you want to sae the data, backupo before run the program*\r
-\r
-\r
-## Config.json\r
-\r
-In the *config.json* file, there are the project options (you can create it manually in the project folder)\r
-\r
-\\`\\`\\`json\r
-{\r
- \\\"show_browser\\\": false,\r
- \\\"max_results\\\": 10,\r
- \\\"gs_link\\\": \\\"https://docs.google.com/spreadsheets/d/.../edit?usp=sharing\\\"\r
-}\r
-\\`\\`\\`\r
-\r
-### show_browser\r
-\r
-Show (true) or hide (false) the google chrome window.\r
-\r
-### max_results\r
-\r
-Max number of results for save in the google sheet\r
-\r
-### gs_link\r
-\r
+There are some few steps before run the project:
+
+## Generate a google sheets api key
+
+For use this project, you need to generate a *google sheets api key*, from google console, sand save it in the folder "spreadsheet_manager", width the name "credentials.json". 
+Here a tutorial about [how to generate a google sheets api key, step by step](https://github.com/DariHernandez/tutorials/tree/master/generate%20google%20sheets%20api%20key)
+
+**WARNING:** Without the api key, the program will raise and error.
+
+## Google sheets template
+
+For use the program, you need a google spreadsheet with the next sheets: 
+* Keywords
+* Results meta
+* Results structure
+
+You can copy this sample sheet: https://docs.google.com/spreadsheets/d/1mR_WqM2cHQw5OsIyH7jev8s2DCrcz32Zg79_UzS0l1A/edit?usp=sharing 
+
+Create or copy the spreadsheet, and generate a share link with edit permissions (you will need it in the next step)
+
+*Note: Each time that you run the program, the data for each sheet is cleaned. If you want to sae the data, backupo before run the program*
+
+
+## Config.json
+
+In the *config.json* file, there are the project options (you can create it manually in the project folder)
+
+```json
+{
+ "show_browser": false,
+ "max_results": 10,
+ "gs_link": "https://docs.google.com/spreadsheets/d/.../edit?usp=sharing"
+}
+```
+
+### show_browser
+
+Show (true) or hide (false) the google chrome window.
+
+### max_results
+
+Max number of results for save in the google sheet
+
+### gs_link
+
 Shared link with edit permissions of your google sheet
 
 # Run
 
-Run the **__main __.py** or the **project folder** with your python 3.9 interpreter.\r
-\r
+Run the **__main __.py** or the **project folder** with your python 3.9 interpreter.
+
 You can do it from terminal or by **double clicking the file**
 
 
